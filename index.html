@@ -3,31 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <title>Integer Sorter</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   </head>
-  <body>
-    <h1>Integer Sorter</h1>
-    <div>
-        <table>
-            <tbody id='data'></tbody>
-        </table>
-    </div>
-    <div id="output">
-        <h3>Output</h3>
-    </div>
-    <h3>Buttons</h3>
-    <div>
-      <div>
-        <button id="loadData">Load Random Data</button>
+  <center>
+     <body>
+      <h1>Integer Sorter</h1>
+        <div id="top">
+          <div id='data' style="display: flex">
+            <div style="width: 800px">
+              <h3>Unsorted Data</h3>
+              <table class=".table" style='width: 90%'>
+                  <tbody id='unsortedData'></tbody>
+              </table>
+            </div>
+            <div style="width: 800px">
+              <h3>Sorted Data</h3>
+              <table class=".table" style='width: 90%'>
+                  <tbody id='sortedData'></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div id="bottom" style="display: flex;">
+          <div style="width: 800px">
+            <h3>Buttons</h3>
+            <div>
+              <div>
+                <button class="btn btn-primary" id="loadData">Load Random Data</button>
+              </div>
+              <br/>
+              <div>
+                <button class="btn btn-success" id="bubbleSort">Bubble Sort</button>
+                <button class="btn btn-success" id="insertionSort">Insertion Sort</button>
+                <button class="btn btn-success" id="mergeSort">Merge Sort</button>
+              </div>
+            </div>
+          </div>
+          <div style="width: 800px">
+            <h3>Output</h3>
+            <textarea id="output" class="text-primary" style="width: 800px; height: 100px; resize: none;"></textarea>
+          </div>
+        </div>
       </div>
-      <br/>
-      <div>
-        <button id="bubbleSort">Bubble Sort</button>
-        <button id="insertionSort">Insertion Sort</button>
-        <button id="mergeSort">Merge Sort</button>
-      </div>
-    </div>
-  </body>
+    </body>
+  </center>
+ 
   <script src="output.js"></script>
   <script src="main.js"></script>
 </html>
