@@ -1,6 +1,4 @@
 
-const Module = require('./output.js')
-
 Module['onRuntimeInitialized'] = () => {
     function setRandomArray(length, dataTypeDivisor){
         var arr = new Int32Array(length);
