@@ -1,1 +1,15 @@
-"Hello World" 
+<html>
+    <title>Emscripten Demo</title>
+    <script type="text/javascript">
+        var Module = {
+            onRuntimeInitialized: function(){
+                document.body.innerHTML += "Module Loaded<br/>";
+                let scriptEle = document.createElement("script");
+                scriptEle.setAttribute("src", "main.js");
+                document.body.appendChild(scriptEle);
+            }
+        }
+    </script>
+    <script src="output.js"></script>
+    <body></body>
+</html>

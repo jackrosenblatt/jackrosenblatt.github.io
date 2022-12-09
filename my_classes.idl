@@ -1,0 +1,10 @@
+interface Sorter {
+    void Sorter();
+    void bubbleSort();
+    void insertionSort();
+    void mergeSort();
+
+    long getDataPtr();
+    long getDataLength();
+    void setData(long length);
+};
