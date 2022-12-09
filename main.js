@@ -4,8 +4,6 @@ function output(msg){
     output.innerHTML += msg +'\n'
 }
 
-const divisor = 25;
-
 function outputUnsortedData(arr){
     var data = document.getElementById("unsortedData");
 
@@ -49,7 +47,7 @@ function setArray(sorter, arr, dataTypeDivisor){
 
     Module.HEAP32.set(arr, buf / dataTypeDivisor);
 
-    sorter.setData(arrayLength);
+    sorter.setData(arr.length);
 }
 
 function getRandomArray(length){
@@ -66,12 +64,16 @@ function getRandomArray(length){
 
 const arrayLength = 500;
 var currentArr;
+const divisor = 25;
 
 Module['onRuntimeInitialized'] = () => {
     
     document.getElementById("loadData").onclick = () => {
+        debugger;
         currentArr = getRandomArray(arrayLength)
         setArray(sorter, currentArr, 4);
+
+        outputSortedData([])
     }
 
     document.getElementById("bubbleSort").onclick = () => {
@@ -81,7 +83,6 @@ Module['onRuntimeInitialized'] = () => {
 
         showCurrentArray(dataTypeDivisor)
         output("Bubble Sort Complete, took:\t\t"+((t1-t0)/1000).toFixed(4)+" seconds")
-        setArray(sorter, currentArr, 4);
     }
 
     document.getElementById("insertionSort").onclick = () => {
@@ -91,7 +92,6 @@ Module['onRuntimeInitialized'] = () => {
 
         showCurrentArray(dataTypeDivisor)
         output("Insertion Sort Complete, took:\t"+((t1-t0)/1000).toFixed(4)+" seconds")
-        setArray(sorter, currentArr, 4);
     }
 
     document.getElementById("mergeSort").onclick = () => {
@@ -101,7 +101,6 @@ Module['onRuntimeInitialized'] = () => {
         
         showCurrentArray(dataTypeDivisor)
         output("Merge Sort Complete, took:\t\t"+((t1-t0)/1000).toFixed(4)+" seconds")
-        setArray(sorter, currentArr, 4);
     }
     
     function showCurrentArray(dataTypeDivisor){
