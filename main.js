@@ -1,55 +1,91 @@
+function output(msg){
+    var output = document.getElementById("output");
 
-const Module = require('./output.js')
+    output.innerHTML += '<p>'+ msg +'</p>'
+}
+
+function outputData(arr){
+    var divisor = 50;
+    var data = document.getElementById("data");
+
+    var inner = "";
+
+    for(var k = 0; k < arr.length / divisor; k++){
+        inner += '<tr>'
+        for(var j = 0; j < divisor; j++){
+            inner += '<td>'+arr[k*divisor + j]+'</td>';
+        }
+
+        inner += '</tr>'
+    }
+
+    data.innerHTML = inner;
+}
+
+function setRandomArray(length, dataTypeDivisor){
+    var arr = new Int32Array(length);
+    for(var k = 0; k < length; k++){
+        arr[k] = Math.floor(Math.random() * 100);
+    }
+    
+    output("randomly generated values from js")
+    outputData(arr);
+    
+    var buf = Module._malloc(arr.byteLength);
+
+    Module.HEAP32.set(arr, buf / dataTypeDivisor);
+
+    sorter.setData(arrayLength);
+}
+
+const arrayLength = 1000;
+
 
 Module['onRuntimeInitialized'] = () => {
-    function setRandomArray(length, dataTypeDivisor){
-        var arr = new Int32Array(length);
-        for(var k = 0; k < length; k++){
+    
+    document.getElementById("loadData").onclick = () => {
+        var arr = new Int32Array(arrayLength);
+        for(var k = 0; k < arrayLength; k++){
             arr[k] = Math.floor(Math.random() * 100);
         }
-        
-        console.log("\nrandomly generated values from js")
-        console.log(arr);
+
+        outputData(arr);
         
         var buf = Module._malloc(arr.byteLength);
-    
+        
         Module.HEAP32.set(arr, buf / dataTypeDivisor);
-    
+        
         sorter.setData(arrayLength);
+        
+        output("\nRandom values in c++")
+        showCurrentArray(dataTypeDivisor)
+    }
+
+    document.getElementById("bubbleSort").onclick = () => {
+        sorter.bubbleSort();
+        showCurrentArray(dataTypeDivisor)
+        output("Bubble Sort Complete")
+    }
+
+    document.getElementById("insertionSort").onclick = () => {
+        sorter.insertionSort();
+        showCurrentArray(dataTypeDivisor)
+        output("Insertion Sort Complete")
+    }
+
+    document.getElementById("mergeSort").onclick = () => {
+        sorter.mergeSort();
+        showCurrentArray(dataTypeDivisor)
+        output("Merge Sort Complete")
     }
     
     function showCurrentArray(dataTypeDivisor){
         var dataAddress = (sorter.getDataPtr()/dataTypeDivisor);
         var dataLength = sorter.getDataLength();
-        console.log(Module.HEAP32.subarray(dataAddress, dataAddress + dataLength))
+        outputData(Module.HEAP32.subarray(dataAddress, dataAddress + dataLength))
     }
     
     var sorter = new Module.Sorter();
     
     const dataTypeDivisor = 4;
-    
-    console.log("Starting c++ values")
-    showCurrentArray(dataTypeDivisor)
-    
-    var arrayLength = 100;
-    var arr = new Int32Array(arrayLength);
-    for(var k = 0; k < arrayLength; k++){
-        arr[k] = Math.floor(Math.random() * 100);
-    }
-    
-    console.log("\nrandomly generated js values")
-    console.log(arr);
-    
-    var buf = Module._malloc(arr.byteLength);
-    
-    Module.HEAP32.set(arr, buf / dataTypeDivisor);
-    
-    sorter.setData(arrayLength);
-    
-    console.log("\nRandom values in c++")
-    showCurrentArray(dataTypeDivisor)
-    
-    console.log("\nBubble sorted Values")
-    sorter.bubbleSort();
-    showCurrentArray(dataTypeDivisor)
 }

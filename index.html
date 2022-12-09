@@ -1,15 +1,33 @@
+<!DOCTYPE html>
 <html>
-    <title>Emscripten Demo</title>
-    <script type="text/javascript">
-        var Module = {
-            onRuntimeInitialized: function(){
-                document.body.innerHTML += "Module Loaded<br/>";
-                let scriptEle = document.createElement("script");
-                scriptEle.setAttribute("src", "main.js");
-                document.body.appendChild(scriptEle);
-            }
-        }
-    </script>
-    <script src="output.js"></script>
-    <body></body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Integer Sorter</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1>Integer Sorter</h1>
+    <div>
+        <table>
+            <tbody id='data'></tbody>
+        </table>
+    </div>
+    <div id="output">
+        <h3>Output</h3>
+    </div>
+    <h3>Buttons</h3>
+    <div>
+      <div>
+        <button id="loadData">Load Random Data</button>
+      </div>
+      <br/>
+      <div>
+        <button id="bubbleSort">Bubble Sort</button>
+        <button id="insertionSort">Insertion Sort</button>
+        <button id="mergeSort">Merge Sort</button>
+      </div>
+    </div>
+  </body>
+  <script src="output.js"></script>
+  <script src="main.js"></script>
 </html>
