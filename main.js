@@ -40,7 +40,6 @@ function setRandomArray(length, dataTypeDivisor){
 
 const arrayLength = 1000;
 
-
 Module['onRuntimeInitialized'] = () => {
     
     document.getElementById("loadData").onclick = () => {
